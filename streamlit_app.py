@@ -4,7 +4,8 @@ from PIL import Image
 import kilter_utils
 
 st.write(os.getcwd())
-path = "C:/Users/Declan/Documents/DataScienceProjects/KilterBoard_project/streamlit_app/"
+path = os.getcwd()
+#path = "C:/Users/Declan/Documents/DataScienceProjects/KilterBoard_project/streamlit_app/"
 
 st.set_page_config(
     page_title="Main Page"
