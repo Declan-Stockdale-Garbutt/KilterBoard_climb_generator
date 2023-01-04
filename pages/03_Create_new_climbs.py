@@ -72,14 +72,16 @@ if st.session_state['preloading'] == False:
         df_climbing = kilter_utils.get_df_for_GAN(data_path)
 
         #
-        df_climbing = kilter_utils.split_frames(df_climbing)
-        df_climbing  = kilter_utils.raw_holds_to_basic(df_climbing)
+        #df_climbing = kilter_utils.split_frames(df_climbing)
+        #df_climbing  = kilter_utils.raw_holds_to_basic(df_climbing)
 
         # Perform index based encoding and retrieve token to hold dictionary
-        X_df_raw, word_to_idx_raw = kilter_utils.perform_index_based_tokenization(data_path, df_climbing, base=False)
+        #X_df_raw, word_to_idx_raw = kilter_utils.perform_index_based_tokenization(data_path, df_climbing, base=False)
 
         # concat df with sequence to tokenized holds using index based encoding
-        df_climbing_raw = pd.concat([df_climbing, X_df_raw], axis=1)
+        #df_climbing_raw = pd.concat([df_climbing, X_df_raw], axis=1)
+        
+        df_climbing_raw = pd.read_csv(f"{data_path}df_climbing_raw_sequence_encoded.csv")
 
         # Split into training columns and target
         features_raw, target_raw = kilter_utils.split_df_into_features_and_target(df_climbing_raw)
