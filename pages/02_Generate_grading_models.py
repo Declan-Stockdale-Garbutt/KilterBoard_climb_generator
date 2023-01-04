@@ -118,18 +118,18 @@ try:
     dict = {'Model' : 'rf_model_raw','Exact Accuracy': exact,'One off Accuracy':one_off}
     model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
 
-    st.write('lstm models loading in')
-    lstm_model_stripped = pickle.load(open(f"{model_path}lstm_model_stripped.pickle", "rb"))
-    lstm_model_raw = pickle.load(open(f"{model_path}lstm_model_raw.pickle", "rb"))
+    #st.write('lstm models loading in')
+    #lstm_model_stripped = pickle.load(open(f"{model_path}lstm_model_stripped.pickle", "rb"))
+    #lstm_model_raw = pickle.load(open(f"{model_path}lstm_model_raw.pickle", "rb"))
 
-    exact, one_off = kilter_utils.make_predictions(lstm_model_stripped,X_test,y_test)
-    dict = {'Model' : 'lstm_model_stripped','Exact Accuracy': exact,'One off Accuracy':one_off}
-    model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
+    #exact, one_off = kilter_utils.make_predictions(lstm_model_stripped,X_test,y_test)
+    #dict = {'Model' : 'lstm_model_stripped','Exact Accuracy': exact,'One off Accuracy':one_off}
+    #model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
 
 
-    exact, one_off = kilter_utils.make_predictions(lstm_model_raw,X_test_raw,y_test_raw)
-    dict = {'Model' : 'lstm_model_raw','Exact Accuracy': exact,'One off Accuracy':one_off}
-    model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
+    #exact, one_off = kilter_utils.make_predictions(lstm_model_raw,X_test_raw,y_test_raw)
+    #dict = {'Model' : 'lstm_model_raw','Exact Accuracy': exact,'One off Accuracy':one_off}
+    #model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
 
 
     st.write('Accuracy of models ')
@@ -195,41 +195,41 @@ if train_models_button:
 
 
 
-    st.write('Training LSTM on stripped hold info')
-    lstm_model_stripped = Sequential()
-    lstm_model_stripped.add(Embedding(df_climbing_base.shape[0], 128, input_length=features.shape[1]))
-    lstm_model_stripped.add(SpatialDropout1D(0.2))
-    lstm_model_stripped.add(LSTM(64, dropout=0.2, recurrent_dropout=0.2))
-    lstm_model_stripped.add(Dense(17, activation='softmax'))
-    lstm_model_stripped.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    #st.write('Training LSTM on stripped hold info')
+    #lstm_model_stripped = Sequential()
+    #lstm_model_stripped.add(Embedding(df_climbing_base.shape[0], 128, input_length=features.shape[1]))
+    #lstm_model_stripped.add(SpatialDropout1D(0.2))
+    #lstm_model_stripped.add(LSTM(64, dropout=0.2, recurrent_dropout=0.2))
+    #lstm_model_stripped.add(Dense(17, activation='softmax'))
+    #lstm_model_stripped.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-    epochs = 50
-    batch_size = 1024
+    #epochs = 50
+    #batch_size = 1024
 
-    history_lstm_stripped = lstm_model_stripped.fit(X_train, y_train, epochs=epochs, batch_size=batch_size,validation_split=0.1,callbacks=[EarlyStopping(monitor='val_loss', patience=3, min_delta=0.0001)])
-    pickle.dump(lstm_model_stripped, open(f"{model_path}lstm_model_stripped.pickle", "wb"))
+    #history_lstm_stripped = lstm_model_stripped.fit(X_train, y_train, epochs=epochs, batch_size=batch_size,validation_split=0.1,callbacks=[EarlyStopping(monitor='val_loss', patience=3, min_delta=0.0001)])
+    #pickle.dump(lstm_model_stripped, open(f"{model_path}lstm_model_stripped.pickle", "wb"))
 
-    exact, one_off = kilter_utils.make_predictions(lstm_model_stripped,X_test,y_test)
-    dict = {'Model' : 'lstm_model_stripped','Exact Accuracy': exact,'One off Accuracy':one_off}
-    model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
+    #exact, one_off = kilter_utils.make_predictions(lstm_model_stripped,X_test,y_test)
+    #dict = {'Model' : 'lstm_model_stripped','Exact Accuracy': exact,'One off Accuracy':one_off}
+    #model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
 
-    st.write('Training LSTM on stripped raw info')
-    lstm_model_raw = Sequential()
-    lstm_model_raw.add(Embedding(df_climbing_raw.shape[0], 128, input_length=features.shape[1]))
-    lstm_model_raw.add(SpatialDropout1D(0.2))
-    lstm_model_raw.add(LSTM(64, dropout=0.2, recurrent_dropout=0.2))
-    lstm_model_raw.add(Dense(17, activation='softmax'))
-    lstm_model_raw.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    #st.write('Training LSTM on stripped raw info')
+    #lstm_model_raw = Sequential()
+    #lstm_model_raw.add(Embedding(df_climbing_raw.shape[0], 128, input_length=features.shape[1]))
+    #lstm_model_raw.add(SpatialDropout1D(0.2))
+    #lstm_model_raw.add(LSTM(64, dropout=0.2, recurrent_dropout=0.2))
+    #lstm_model_raw.add(Dense(17, activation='softmax'))
+    #lstm_model_raw.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-    epochs = 50
-    batch_size = 1024
+    #epochs = 50
+    #batch_size = 1024
 
-    history_lstm_raw = lstm_model_raw.fit(X_train_raw, y_train_raw, epochs=epochs, batch_size=batch_size,validation_split=0.1,callbacks=[EarlyStopping(monitor='val_loss', patience=3, min_delta=0.0001)])
-    pickle.dump(lstm_model_raw, open(f"{model_path}lstm_model_raw.pickle", "wb"))
+    #history_lstm_raw = lstm_model_raw.fit(X_train_raw, y_train_raw, epochs=epochs, batch_size=batch_size,validation_split=0.1,callbacks=[EarlyStopping(monitor='val_loss', patience=3, min_delta=0.0001)])
+    #pickle.dump(lstm_model_raw, open(f"{model_path}lstm_model_raw.pickle", "wb"))
 
-    exact, one_off = kilter_utils.make_predictions(lstm_model_raw,X_test,y_test)
-    dict = {'Model' : 'lstm_model_raw','Exact Accuracy': exact,'One off Accuracy':one_off}
-    model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
+    #exact, one_off = kilter_utils.make_predictions(lstm_model_raw,X_test,y_test)
+    #dict = {'Model' : 'lstm_model_raw','Exact Accuracy': exact,'One off Accuracy':one_off}
+    #model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
 
     st.write('Training Generative Adverserial Network (GAN) on raw info')
     kilter_GAN = GANGenerator(gen_x_times=1.1,
