@@ -208,7 +208,7 @@ else:
             to_predict_stripped = kilter_utils.preprocess_for_single_grade_prediction_stripped(grade_angle_of_interest,generted_climb_idx, data_path)
 
             # run through LSTM_raw
-            model_path = "C:/Users/Declan/Documents/DataScienceProjects/KilterBoard_project/streamlit_app/models/"
+            model_path = f"{os.getcwd()}/models/"
 
             xgb_model_stripped = st.session_state.xgb_model_stripped
             xgb_model_raw = st.session_state.xgb_model_saw
