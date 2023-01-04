@@ -13,7 +13,7 @@ import seaborn as sns
 #import kilter_utils
 st.set_page_config(layout="wide")
 
-data_path = path = f"{os.getcwd()}/data/"
+data_path = f"{os.getcwd()}/data/"
 
 '''# Analysis'''
 
