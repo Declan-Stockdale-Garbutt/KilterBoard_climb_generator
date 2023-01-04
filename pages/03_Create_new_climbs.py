@@ -147,6 +147,9 @@ if st.session_state['preloading'] == False:
         st.experimental_rerun()
 
 else:
+    
+    st.write("Close side bar for better viewing experience)
+    
     data_path = f"{os.getcwd()}/data/"
     board_path = f"{data_path}full_board_commercial.png"
     board_image = cv2.imread(board_path)
