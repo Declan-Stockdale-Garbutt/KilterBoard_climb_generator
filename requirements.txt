@@ -15,3 +15,4 @@ tabgan==1.2.1
 tensorflow==2.11.0
 #tensorflow_intel==2.11.0
 xgboost==1.7.2
+scikit_learn==1.2.0
