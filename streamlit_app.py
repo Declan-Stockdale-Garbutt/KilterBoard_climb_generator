@@ -7,9 +7,9 @@ st.write(os.getcwd())
 path = os.getcwd()
 #path = "C:/Users/Declan/Documents/DataScienceProjects/KilterBoard_project/streamlit_app/"
 
-st.set_page_config(
-    page_title="Main Page"
-)
+#st.set_page_config(
+#    page_title="Main Page"
+#)
 
 '''## Kilter Board Analysis'''
 '''### By Declan Stockdale-Garbutt'''
