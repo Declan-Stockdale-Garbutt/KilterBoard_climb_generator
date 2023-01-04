@@ -108,12 +108,13 @@ try:
     st.write('rf models loading in')
     rf_model_stripped = pickle.load(open(f"{model_path}rf_model_stripped.pickle", "rb"))
     rf_model_raw = pickle.load(open(f"{model_path}rf_model_raw.pickle", "rb"))
-
+    
+    st.write('rf_model_stripped loading in')
     exact, one_off = kilter_utils.make_predictions(rf_model_stripped,X_test,y_test)
     dict = {'Model' : 'rf_model_stripped','Exact Accuracy': exact,'One off Accuracy':one_off}
     model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
 
-
+    st.write('rf_model_raw loading in')
     exact, one_off = kilter_utils.make_predictions(rf_model_raw,X_test_raw,y_test_raw)
     dict = {'Model' : 'rf_model_raw','Exact Accuracy': exact,'One off Accuracy':one_off}
     model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
