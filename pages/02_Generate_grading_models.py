@@ -93,7 +93,7 @@ try:
     # Create df
     model_accuracy_df = pd.DataFrame(columns=['Model','Exact Accuracy','One off Accuracy'])
 
-
+    st.write('xgb_model_stripped loading in')
     xgb_model_stripped = pickle.load(open(f"{model_path}xgb_model_stripped.pickle", "rb"))
     xgb_model_raw = pickle.load(open(f"{model_path}xgb_model_raw.pickle", "rb"))
 
@@ -105,6 +105,7 @@ try:
     dict = {'Model' : 'xgb_model_raw','Exact Accuracy': exact,'One off Accuracy':one_off}
     model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
 
+    st.write('rf models loading in')
     rf_model_stripped = pickle.load(open(f"{model_path}rf_model_stripped.pickle", "rb"))
     rf_model_raw = pickle.load(open(f"{model_path}rf_model_raw.pickle", "rb"))
 
@@ -117,7 +118,7 @@ try:
     dict = {'Model' : 'rf_model_raw','Exact Accuracy': exact,'One off Accuracy':one_off}
     model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
 
-
+    st.write('lstm models loading in')
     lstm_model_stripped = pickle.load(open(f"{model_path}lstm_model_stripped.pickle", "rb"))
     lstm_model_raw = pickle.load(open(f"{model_path}lstm_model_raw.pickle", "rb"))
 
