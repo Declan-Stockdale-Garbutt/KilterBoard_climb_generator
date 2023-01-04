@@ -51,7 +51,7 @@ st.write(' pretrained models are included in this app. This page allows for  str
 
 
 data_path = f"{os.getcwd()}/data/"
-model_path = f"{os.getcwd()}/data/models/"
+model_path = f"{os.getcwd()}/models/"
 
 with st.spinner(text="Loading in data - Required for training and predicting"):
     # get data
