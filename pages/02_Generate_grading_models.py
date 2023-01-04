@@ -88,7 +88,8 @@ with st.spinner(text="Loading in data - Required for training and predicting"):
 
 # try to load in models
 try:
-
+    st.write(model_path)
+    st.write(os.listdir(model_path))
     # Create df
     model_accuracy_df = pd.DataFrame(columns=['Model','Exact Accuracy','One off Accuracy'])
 
