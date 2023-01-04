@@ -6,6 +6,7 @@ import pandas as pd
 import pickle
 import matplotlib.pyplot as plt
 import random
+import os
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
@@ -35,8 +36,8 @@ if st.session_state['preloading'] == False:
     #st.write('Loading in necessary files, this will only run on the first instance of loading this page')
 
 
-        data_path = "C:/Users/Declan/Documents/DataScienceProjects/KilterBoard_project/streamlit_app/data/"
-        model_path = "C:/Users/Declan/Documents/DataScienceProjects/KilterBoard_project/streamlit_app/models/"
+        data_path = f"{os.getcwd()}/data/"
+        model_path = f"{os.getcwd()}/models/"
 
         # load in models
         xgb_model_stripped = pickle.load(open(f"{model_path}xgb_model_stripped.pickle", "rb"))
