@@ -48,13 +48,13 @@ if st.session_state['preloading'] == False:
         if 'xgb_model_raw' not in st.session_state:
             st.session_state.xgb_model_saw = xgb_model_raw
 
-        rf_model_stripped = pickle.load(open(f"{model_path}rf_model_stripped.pickle", "rb"))
-        if 'rf_model_stripped' not in st.session_state:
-            st.session_state.rf_model_stripped = rf_model_stripped
+        #rf_model_stripped = pickle.load(open(f"{model_path}rf_model_stripped.pickle", "rb"))
+        #if 'rf_model_stripped' not in st.session_state:
+        #    st.session_state.rf_model_stripped = rf_model_stripped
 
-        rf_model_raw = pickle.load(open(f"{model_path}rf_model_raw.pickle", "rb"))
-        if 'rf_model_raw' not in st.session_state:
-            st.session_state.rf_model_raw = rf_model_raw
+        #rf_model_raw = pickle.load(open(f"{model_path}rf_model_raw.pickle", "rb"))
+        #if 'rf_model_raw' not in st.session_state:
+        #    st.session_state.rf_model_raw = rf_model_raw
 
         #lstm_model_stripped = pickle.load(open(f"{model_path}lstm_model_stripped.pickle", "rb"))
         #if 'lstm_model_stripped' not in st.session_state:
@@ -212,8 +212,8 @@ else:
 
             xgb_model_stripped = st.session_state.xgb_model_stripped
             xgb_model_raw = st.session_state.xgb_model_saw
-            rf_model_stripped = st.session_state.rf_model_stripped
-            rf_model_raw = st.session_state.rf_model_raw
+            #rf_model_stripped = st.session_state.rf_model_stripped
+            #rf_model_raw = st.session_state.rf_model_raw
             #lstm_model_stripped = st.session_state.lstm_model_stripped
             #lstm_model_raw = st.session_state.lstm_model_raw
 
@@ -228,11 +228,11 @@ else:
 
 
 
-            y_pred = rf_model_stripped.predict(np.asarray(to_predict_stripped).astype(np.float32)) #to_predict_stripped
-            model_grade_df = model_grade_df.append({'Model':'rf_model_stripped', 'Grade': y_pred}, ignore_index=True)
+            #y_pred = rf_model_stripped.predict(np.asarray(to_predict_stripped).astype(np.float32)) #to_predict_stripped
+            #model_grade_df = model_grade_df.append({'Model':'rf_model_stripped', 'Grade': y_pred}, ignore_index=True)
 
-            y_pred = rf_model_raw.predict(np.asarray(to_predict_stripped).astype(np.float32)) #to_predict_stripped
-            model_grade_df = model_grade_df.append({'Model':'rf_model_raw', 'Grade': y_pred}, ignore_index=True)
+            #y_pred = rf_model_raw.predict(np.asarray(to_predict_stripped).astype(np.float32)) #to_predict_stripped
+            #model_grade_df = model_grade_df.append({'Model':'rf_model_raw', 'Grade': y_pred}, ignore_index=True)
 
 
 
