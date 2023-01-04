@@ -1,8 +1,9 @@
 keras==2.11.0
 matplotlib==3.6.2
 numpy==1.23.5
-libgl1
-opencv_python==4.7.0.68
+#libgl1
+opencv_python-headless
+#opencv_python==4.7.0.68
 pandas==1.5.2
 pandasql==0.7.3
 Pillow==9.4.0
