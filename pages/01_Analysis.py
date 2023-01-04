@@ -12,7 +12,7 @@ import seaborn as sns
 #import kilter_utils
 st.set_page_config(layout="wide")
 
-data_path = "C:/Users/Declan/Documents/DataScienceProjects/KilterBoard_project/streamlit_app/data/"
+data_path = path = f"{os.getcwd()}/data/"
 
 '''# Analysis'''
 
