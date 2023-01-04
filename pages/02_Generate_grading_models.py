@@ -49,8 +49,8 @@ st.write("This page is where the model are trained for grade prediction based on
 st.write(' pretrained models are included in this app. This page allows for  straighforward approach to retrain the models based on new data')
 
 
-data_path = "C:/Users/Declan/Documents/DataScienceProjects/KilterBoard_project/streamlit_app/data/"
-model_path = "C:/Users/Declan/Documents/DataScienceProjects/KilterBoard_project/streamlit_app/models/"
+data_path = f"{os.getcwd()}/data/"
+model_path = f"{os.getcwd()}/data/models/"
 
 with st.spinner(text="Loading in data - Required for training and predicting"):
     # get data
