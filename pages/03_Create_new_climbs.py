@@ -147,7 +147,7 @@ if st.session_state['preloading'] == False:
         st.experimental_rerun()
 
 else:
-    data_path = "C:/Users/Declan/Documents/DataScienceProjects/KilterBoard_project/streamlit_app/data/"
+    data_path = f"{os.getcwd()}/data/"
     board_path = f"{data_path}full_board_commercial.png"
     board_image = cv2.imread(board_path)
 
