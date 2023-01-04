@@ -3,7 +3,7 @@ import os
 from PIL import Image
 import kilter_utils
 
-print(os.getcwd())
+st.write(os.getcwd())
 path = "C:/Users/Declan/Documents/DataScienceProjects/KilterBoard_project/streamlit_app/"
 
 st.set_page_config(
