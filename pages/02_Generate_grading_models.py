@@ -105,22 +105,22 @@ try:
     dict = {'Model' : 'xgb_model_raw','Exact Accuracy': exact,'One off Accuracy':one_off}
     model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
 
-    st.write('rf models loading in')
-    rf_model_stripped = pickle.load(open(f"{model_path}rf_model_stripped.pickle", "rb"))
-    rf_model_raw = pickle.load(open(f"{model_path}rf_model_raw.pickle", "rb"))
+    #st.write('rf models loading in')
+    #rf_model_stripped = pickle.load(open(f"{model_path}rf_model_stripped.pickle", "rb"))
+    #rf_model_raw = pickle.load(open(f"{model_path}rf_model_raw.pickle", "rb"))
     
-    st.write('rf_model_stripped loading in')
-    exact, one_off = kilter_utils.make_predictions(rf_model_stripped,X_test,y_test)
-    st.write('break?')
-    dict = {'Model' : 'rf_model_stripped','Exact Accuracy': exact,'One off Accuracy':one_off}
-    st.write('break here?')
+    #st.write('rf_model_stripped loading in')
+    #exact, one_off = kilter_utils.make_predictions(rf_model_stripped,X_test,y_test)
+    #st.write('break?')
+    #dict = {'Model' : 'rf_model_stripped','Exact Accuracy': exact,'One off Accuracy':one_off}
+    #st.write('break here?')
     
-    model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
+    #model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
 
-    st.write('rf_model_raw loading in')
-    exact, one_off = kilter_utils.make_predictions(rf_model_raw,X_test_raw,y_test_raw)
-    dict = {'Model' : 'rf_model_raw','Exact Accuracy': exact,'One off Accuracy':one_off}
-    model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
+    #st.write('rf_model_raw loading in')
+    #exact, one_off = kilter_utils.make_predictions(rf_model_raw,X_test_raw,y_test_raw)
+    #dict = {'Model' : 'rf_model_raw','Exact Accuracy': exact,'One off Accuracy':one_off}
+    #model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
 
     #st.write('lstm models loading in')
     #lstm_model_stripped = pickle.load(open(f"{model_path}lstm_model_stripped.pickle", "rb"))
@@ -178,23 +178,23 @@ if train_models_button:
     dict = {'Model' : 'xgb_model_raw','Exact Accuracy': exact,'One off Accuracy':one_off}
     model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
 
-    st.write('Training random forest on stripped hold info')
-    rf_model_stripped = RandomForestClassifier(n_estimators=50, max_depth=20,max_features="auto", random_state=44)
-    rf_model_stripped.fit(X_train, y_train)
-    pickle.dump(rf_model_stripped, open(f"{model_path}rf_model_stripped.pickle", "wb"))
+    #st.write('Training random forest on stripped hold info')
+    #rf_model_stripped = RandomForestClassifier(n_estimators=50, max_depth=20,max_features="auto", random_state=44)
+    #rf_model_stripped.fit(X_train, y_train)
+    #pickle.dump(rf_model_stripped, open(f"{model_path}rf_model_stripped.pickle", "wb"))
 
-    exact, one_off = kilter_utils.make_predictions(rf_model_stripped,X_test,y_test)
-    dict = {'Model' : 'rf_model_stripped','Exact Accuracy': exact,'One off Accuracy':one_off}
-    model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
+    #exact, one_off = kilter_utils.make_predictions(rf_model_stripped,X_test,y_test)
+    #dict = {'Model' : 'rf_model_stripped','Exact Accuracy': exact,'One off Accuracy':one_off}
+    #model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
 
-    st.write('Training random forest on raw info')
-    rf_model_raw = RandomForestClassifier(n_estimators=50,  max_depth=20, max_features="auto", random_state=44)
-    rf_model_raw.fit(X_train_raw, y_train_raw)
-    pickle.dump(rf_model_raw, open(f"{model_path}rf_model_raw.pickle", "wb"))
+    #st.write('Training random forest on raw info')
+    #rf_model_raw = RandomForestClassifier(n_estimators=50,  max_depth=20, max_features="auto", random_state=44)
+    #rf_model_raw.fit(X_train_raw, y_train_raw)
+    #pickle.dump(rf_model_raw, open(f"{model_path}rf_model_raw.pickle", "wb"))
 
-    exact, one_off = kilter_utils.make_predictions(rf_model_raw,X_test,y_test)
-    dict = {'Model' : 'rf_model_raw','Exact Accuracy': exact,'One off Accuracy':one_off}
-    model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
+    #exact, one_off = kilter_utils.make_predictions(rf_model_raw,X_test,y_test)
+    #dict = {'Model' : 'rf_model_raw','Exact Accuracy': exact,'One off Accuracy':one_off}
+    #model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
 
 
 
