@@ -111,7 +111,10 @@ try:
     
     st.write('rf_model_stripped loading in')
     exact, one_off = kilter_utils.make_predictions(rf_model_stripped,X_test,y_test)
+    st.write('break?')
     dict = {'Model' : 'rf_model_stripped','Exact Accuracy': exact,'One off Accuracy':one_off}
+    st.write('break here?')
+    
     model_accuracy_df = model_accuracy_df.append(dict, ignore_index=True)
 
     st.write('rf_model_raw loading in')
