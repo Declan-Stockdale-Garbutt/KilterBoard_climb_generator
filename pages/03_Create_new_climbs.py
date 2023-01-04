@@ -148,7 +148,8 @@ if st.session_state['preloading'] == False:
 
 else:
     
-    st.write("Close side bar for better viewing experience")
+    st.write("Close side bar  and enter full screen for better viewing experience ")
+    st.write("Not all climbs are of high quality, some are absolute garbage. Feel free to modify climbs adding additional holds where necessary")
     
     data_path = f"{os.getcwd()}/data/"
     board_path = f"{data_path}full_board_commercial.png"
