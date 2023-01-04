@@ -56,13 +56,13 @@ if st.session_state['preloading'] == False:
         if 'rf_model_raw' not in st.session_state:
             st.session_state.rf_model_raw = rf_model_raw
 
-        lstm_model_stripped = pickle.load(open(f"{model_path}lstm_model_stripped.pickle", "rb"))
-        if 'lstm_model_stripped' not in st.session_state:
-            st.session_state.lstm_model_stripped = lstm_model_stripped
+        #lstm_model_stripped = pickle.load(open(f"{model_path}lstm_model_stripped.pickle", "rb"))
+        #if 'lstm_model_stripped' not in st.session_state:
+        #    st.session_state.lstm_model_stripped = lstm_model_stripped
 
-        lstm_model_raw = pickle.load(open(f"{model_path}lstm_model_raw.pickle", "rb"))
-        if 'lstm_model_raw' not in st.session_state:
-            st.session_state.lstm_model_raw = lstm_model_raw
+        #lstm_model_raw = pickle.load(open(f"{model_path}lstm_model_raw.pickle", "rb"))
+        #if 'lstm_model_raw' not in st.session_state:
+        #    st.session_state.lstm_model_raw = lstm_model_raw
 
 
         # board Image
@@ -214,8 +214,8 @@ else:
             xgb_model_raw = st.session_state.xgb_model_saw
             rf_model_stripped = st.session_state.rf_model_stripped
             rf_model_raw = st.session_state.rf_model_raw
-            lstm_model_stripped = st.session_state.lstm_model_stripped
-            lstm_model_raw = st.session_state.lstm_model_raw
+            #lstm_model_stripped = st.session_state.lstm_model_stripped
+            #lstm_model_raw = st.session_state.lstm_model_raw
 
 
             y_pred = xgb_model_stripped.predict(np.asarray(to_predict_stripped).astype(np.float32)) #to_predict_stripped
@@ -237,14 +237,14 @@ else:
 
 
 
-            y_pred = lstm_model_stripped.predict(np.asarray(to_predict_stripped).astype(np.float32))
-            y_pred = np.argmax(y_pred, axis=1)
-            model_grade_df = model_grade_df.append({'Model':'lstm_model_stripped', 'Grade': y_pred}, ignore_index=True)
+            #y_pred = lstm_model_stripped.predict(np.asarray(to_predict_stripped).astype(np.float32))
+            #y_pred = np.argmax(y_pred, axis=1)
+            #model_grade_df = model_grade_df.append({'Model':'lstm_model_stripped', 'Grade': y_pred}, ignore_index=True)
             #st.write('LSTM stripped', y_pred)
 
-            y_pred = lstm_model_raw.predict(np.asarray(to_predict_raw).astype(np.float32))
-            y_pred = np.argmax(y_pred, axis=1)
-            model_grade_df = model_grade_df.append({'Model':'lstm_model_raw', 'Grade': y_pred}, ignore_index=True)
+            #y_pred = lstm_model_raw.predict(np.asarray(to_predict_raw).astype(np.float32))
+            #y_pred = np.argmax(y_pred, axis=1)
+            #model_grade_df = model_grade_df.append({'Model':'lstm_model_raw', 'Grade': y_pred}, ignore_index=True)
             #st.write('LSTM raw', y_pred)
 
 
