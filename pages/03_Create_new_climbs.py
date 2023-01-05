@@ -5,7 +5,6 @@ import streamlit as st
 import pandas as pd
 import pickle
 import matplotlib.pyplot as plt
-import json
 import random
 import os
 import numpy as np
@@ -67,23 +66,21 @@ if st.session_state['preloading'] == False:
 
 
         # board Image
-        #board_path = f"{data_path}full_board_commercial.png"
+        board_path = f"{data_path}full_board_commercial.png"
 
         # get dataframe
-        #df_climbing = kilter_utils.get_df_for_GAN(data_path)
+        df_climbing = kilter_utils.get_df_for_GAN(data_path)
 
         #
-        #df_climbing = kilter_utils.split_frames(df_climbing)
-        #df_climbing  = kilter_utils.raw_holds_to_basic(df_climbing)
+        df_climbing = kilter_utils.split_frames(df_climbing)
+        df_climbing  = kilter_utils.raw_holds_to_basic(df_climbing)
 
         # Perform index based encoding and retrieve token to hold dictionary
-        #X_df_raw, word_to_idx_raw = kilter_utils.perform_index_based_tokenization(data_path, df_climbing, base=False)
+        X_df_raw, word_to_idx_raw = kilter_utils.perform_index_based_tokenization(data_path, df_climbing, base=False)
 
         # concat df with sequence to tokenized holds using index based encoding
-        #df_climbing_raw = pd.concat([df_climbing, X_df_raw], axis=1)
-        
-        # read in df
-        df_climbing_raw = pd.read_csv(f"{data_path}df_climbing_stripped_sequence_encoded.csv", index_col=0)
+        df_climbing_raw = pd.concat([df_climbing, X_df_raw], axis=1)
+
         # Split into training columns and target
         features_raw, target_raw = kilter_utils.split_df_into_features_and_target(df_climbing_raw)
 
@@ -97,7 +94,6 @@ if st.session_state['preloading'] == False:
         )
 
         # Create dataframe versions for tabular GAN
-        df_x_train, df_y_train = df_x_train.reset_index(drop=True),df_y_train.reset_index(drop=True)
         df_x_test, df_y_test = df_x_test.reset_index(drop=True),df_y_test.reset_index(drop=True)
 
         # Convert to df
@@ -126,8 +122,6 @@ if st.session_state['preloading'] == False:
 
 
         # #
-        with open(f"{data_path}raw_word_to_index.json", 'r') as f:
-            word_to_idx_raw = json.load(f)
         inverse_dict = {v: k for k, v in word_to_idx_raw.items()}
 
         # create sessions state for df
