@@ -54,38 +54,79 @@ data_path = f"{os.getcwd()}/data/"
 model_path = f"{os.getcwd()}/models/"
 
 with st.spinner(text="Loading in data - Required for training and predicting"):
-    # get data
-    cnx = kilter_utils.read_in_sqllite_file(data_path)
-    df_climbing = pd.read_sql_query("SELECT board_angle, frames, quality_average, v_grade FROM (  SELECT board_angle, grade, boulder_name, TRIM(substr(boulder_name, instr(boulder_name,'/')+2)) AS v_grade, frames, name, ascensionist_count ,quality_average  FROM ( SELECT climb_stats.angle AS board_angle, round(difficulty_average,0) AS grade, frames, name, ascensionist_count, quality_average       FROM climbs  INNER JOIN climb_stats ON climbs.uuid = climb_stats.climb_uuid  WHERE is_listed = 1 and is_draft = 0 and frames_count = 1 and layout_id = 1 and edge_top <= 152 and edge_left >=4 and edge_right <= 140 and frames NOT LIKE '%r2%' and frames NOT LIKE '%r3%') t1 INNER JOIN difficulty_grades ON difficulty_grades.difficulty = t1.grade ORDER BY board_angle ASC, grade ASC) WHERE ascensionist_count >=5  ", cnx)
+    # check file already exists
+    if os.path.exists(f"{data_path}df_climbing_stripped_sequence_encoded.csv"):
+        st.write("Found  df_climbing_stripped_sequence_encoded.csv, loading it now")
 
+        # Read in file
+        df_climbing_base = pd.read_csv(f"{data_path}df_climbing_stripped_sequence_encoded.csv")
 
-    # split frames into list
-    df_climbing = kilter_utils.split_frames(df_climbing)
-    df_climbing = kilter_utils.raw_holds_to_basic(df_climbing)
+        # split data into X and y
+        features, target = kilter_utils.split_df_into_features_and_target(df_climbing_base)
+        X_train, X_test, y_train, y_test = kilter_utils.split_data(features, target)
 
-    X_df_base, _ = kilter_utils.perform_index_based_tokenization(data_path, df_climbing, base = True)
-    df_climbing_base = pd.concat([df_climbing, X_df_base], axis=1)
-    df_climbing_base  = df_climbing_base.sample(frac = 1)
-    # split data into X and y
-    features, target = kilter_utils.split_df_into_features_and_target(df_climbing_base)
-    X_train, X_test, y_train, y_test = kilter_utils.split_data(features, target)
+        X_train.columns = X_train.columns.astype(str)
+        X_test.columns = X_test.columns.astype(str)
 
+    else:
+        st.write("Couldn't find df_climbing_stripped_sequence_encoded.csv, creating it now")
+        # Need to do all processing
+        cnx = kilter_utils.read_in_sqllite_file(data_path)
+        df_climbing = pd.read_sql_query("SELECT board_angle, frames, quality_average, v_grade FROM (  SELECT board_angle, grade, boulder_name, TRIM(substr(boulder_name, instr(boulder_name,'/')+2)) AS v_grade, frames, name, ascensionist_count ,quality_average  FROM ( SELECT climb_stats.angle AS board_angle, round(difficulty_average,0) AS grade, frames, name, ascensionist_count, quality_average       FROM climbs  INNER JOIN climb_stats ON climbs.uuid = climb_stats.climb_uuid  WHERE is_listed = 1 and is_draft = 0 and frames_count = 1 and layout_id = 1 and edge_top <= 152 and edge_left >=4 and edge_right <= 140 and frames NOT LIKE '%r2%' and frames NOT LIKE '%r3%') t1 INNER JOIN difficulty_grades ON difficulty_grades.difficulty = t1.grade ORDER BY board_angle ASC, grade ASC) WHERE ascensionist_count >=5  ", cnx)
 
-    X_df_raw,_ = kilter_utils.perform_index_based_tokenization(data_path, df_climbing, base=False)
-    df_climbing_raw = pd.concat([df_climbing, X_df_raw], axis=1)
-    df_climbing_raw = df_climbing_raw.sample(frac = 1)
-    # split data into X and y
-    features_raw, target_raw = kilter_utils.split_df_into_features_and_target(df_climbing_raw)
-    X_train_raw, X_test_raw, y_train_raw, y_test_raw = kilter_utils.split_data(features_raw, target_raw)
+        df_climbing = kilter_utils.split_frames(df_climbing)
+        df_climbing = kilter_utils.raw_holds_to_basic(df_climbing)
 
-    X_train.columns = X_train.columns.astype(str)
-    X_train_raw.columns = X_train_raw.columns.astype(str)
+        X_df_base, _ = kilter_utils.perform_index_based_tokenization(data_path, df_climbing, base = True)
+        df_climbing_base = pd.concat([df_climbing, X_df_base], axis=1)
+        df_climbing_base  = df_climbing_base.sample(frac = 1)
 
+        # save output
+        df_climbing_base.to_csv(f"{data_path}df_climbing_stripped_sequence_encoded.csv")
 
+        # split data into X and y
+        features, target = kilter_utils.split_df_into_features_and_target(df_climbing_base)
+        X_train, X_test, y_train, y_test = kilter_utils.split_data(features, target)
 
-    X_test_raw.columns = X_test_raw.columns.astype(str)
-    X_test.columns = X_test.columns.astype(str)
+        X_train.columns = X_train.columns.astype(str)
+        X_test.columns = X_test.columns.astype(str)
 
+    if os.path.exists(f"{data_path}df_climbing_raw_sequence_encoded.csv"):
+        st.write("Found df_climbing_stripped_sequence_encoded.csv, loading it now")
+
+        # save to path -
+        df_climbing_raw = pd.read_csv(f"{data_path}df_climbing_raw_sequence_encoded.csv")
+
+        # split data into X and y
+        features_raw, target_raw = kilter_utils.split_df_into_features_and_target(df_climbing_raw)
+        X_train_raw, X_test_raw, y_train_raw, y_test_raw = kilter_utils.split_data(features_raw, target_raw)
+
+        X_train_raw.columns = X_train_raw.columns.astype(str)
+        X_test_raw.columns = X_test_raw.columns.astype(str)
+    else:
+        st.write("Couldn't find df_climbing_raw_sequence_encoded.csv, creating it now")
+        # Perform preprocessing
+        cnx = kilter_utils.read_in_sqllite_file(data_path)
+        df_climbing = pd.read_sql_query("SELECT board_angle, frames, quality_average, v_grade FROM (  SELECT board_angle, grade, boulder_name, TRIM(substr(boulder_name, instr(boulder_name,'/')+2)) AS v_grade, frames, name, ascensionist_count ,quality_average  FROM ( SELECT climb_stats.angle AS board_angle, round(difficulty_average,0) AS grade, frames, name, ascensionist_count, quality_average       FROM climbs  INNER JOIN climb_stats ON climbs.uuid = climb_stats.climb_uuid  WHERE is_listed = 1 and is_draft = 0 and frames_count = 1 and layout_id = 1 and edge_top <= 152 and edge_left >=4 and edge_right <= 140 and frames NOT LIKE '%r2%' and frames NOT LIKE '%r3%') t1 INNER JOIN difficulty_grades ON difficulty_grades.difficulty = t1.grade ORDER BY board_angle ASC, grade ASC) WHERE ascensionist_count >=5  ", cnx)
+
+        df_climbing = kilter_utils.split_frames(df_climbing)
+        df_climbing = kilter_utils.raw_holds_to_basic(df_climbing)
+
+        # save to path -
+        X_df_raw, raw_word_to_index = kilter_utils.perform_index_based_tokenization(data_path, df_climbing, base=False)
+        df_climbing_raw = pd.concat([df_climbing, X_df_raw], axis=1)
+        df_climbing_raw = df_climbing_raw.sample(frac = 1)
+
+        df_climbing_raw.to_csv(f"{data_path}df_climbing_raw_sequence_encoded.csv")
+
+        with open(f"{data_path}raw_word_to_index.json", "w") as outfile:
+            json.dump(raw_word_to_index, outfile)
+        # split data into X and y
+        features_raw, target_raw = kilter_utils.split_df_into_features_and_target(df_climbing_raw)
+        X_train_raw, X_test_raw, y_train_raw, y_test_raw = kilter_utils.split_data(features_raw, target_raw)
+
+        X_train_raw.columns = X_train_raw.columns.astype(str)
+        X_test_raw.columns = X_test_raw.columns.astype(str)
 # try to load in models
 try:
     st.write(model_path)
