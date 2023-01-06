@@ -157,7 +157,7 @@ else:
 
     new_climbs_df = st.session_state['new_climbs_df']
     
-    st.download_button('Download CSV', text_contents, 'text/csv')
+    st.download_button('Download CSV', new_climbs_df, 'text/csv')
     with open('myfile.csv') as f:
         st.download_button('Download CSV', f)  # Defaults to 'text/plain'
 
