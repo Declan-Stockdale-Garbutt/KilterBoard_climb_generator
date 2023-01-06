@@ -156,6 +156,10 @@ else:
     board_image = cv2.imread(board_path)
 
     new_climbs_df = st.session_state['new_climbs_df']
+    
+    st.download_button('Download CSV', text_contents, 'text/csv')
+    with open('myfile.csv') as f:
+        st.download_button('Download CSV', f)  # Defaults to 'text/plain'
 
     distribution_df = st.session_state['distribution_df']
 
