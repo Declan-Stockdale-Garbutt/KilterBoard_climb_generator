@@ -5,6 +5,7 @@ A Kilter Board is an adjustable training wall for climbers. It can range from 0 
 Kilter Boards are becoming more common in commerical gyms and this tool is aimed to help climbers develop novel climbs to assist in training and to remove alot of the trial and error that comes through manually creating climbs.
 
 ![image](https://user-images.githubusercontent.com/53500810/211188704-bb1fb035-bbfb-4c9a-b24a-a0a7b83237f4.png)
+Credit: ClimbFit Kirrawee https://www.climbfit.com.au/location/climbfit-kirrawee/
 
 This application has two functions. The first is to perform EDA on various climbs on the Kilter Board app aiming to discover patterns and most commonly used hodls across a 
 range of difficulties and board angles. 
