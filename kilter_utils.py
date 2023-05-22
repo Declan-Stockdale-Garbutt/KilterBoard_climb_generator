@@ -42,8 +42,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 # RF
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.datasets import make_classification
+#from sklearn.ensemble import RandomForestClassifier
+#from sklearn.datasets import make_classification
 
 # LSTM
 from keras.preprocessing.text import Tokenizer
