@@ -18,6 +18,7 @@ tabgan==1.2.1
 tensorflow==2.11.0
 #tensorflow_intel==2.11.0
 xgboost==1.7.2
+numpy==1.23.5
 #scikit_learn==1.2.0
 #protobuf==3.19.1
 #protobuf==3.20.1
